@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def carregar_dataset(caminho):
-    df = pd.read_csv(caminho)
+    df = pd.read_csv("data/processed/housing_data_CDMX_cleaned.csv")
     print(f"Dataset carregado: {df.shape[0]} linhas, {df.shape[1]} colunas")
     return df
 
