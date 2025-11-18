@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  housing-ml:
+    build: .
+    container_name: housing_ml
+    volumes:
+      - ./data:/app/data
+    command: python src/Main.py

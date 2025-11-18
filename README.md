@@ -1,105 +1,111 @@
-# 🏠 Previsão de Preços de Imóveis – CDMX (Machine Learning)
-
-Este projeto utiliza **Machine Learning supervisionado** para prever o preço de imóveis na Cidade do México, com base em variáveis como tamanho do imóvel, localização (latitude/longitude), tipo de propriedade e outros atributos.
-
-O objetivo principal é aplicar técnicas de:
-
-- **ETL (Extração, Transformação e Limpeza de Dados)**
-- **Análise Exploratória de Dados (EDA)**
-- **Criação de Features (Feature Engineering)**
-- **Treinamento e Avaliação de Modelos de Regressão**
-- **Predição de preços de novos imóveis**
-
-O projeto foi modularizado seguindo boas práticas de engenharia de software, ideal para fins educacionais e profissionais.
 
 ---
 
-# 📂 Estrutura do Projeto
-![alt text](image.png)
+# Previsão de Preços de Imóveis – CDMX (Cidade do México)
 
+Este projeto utiliza Machine Learning supervisionado para prever o preço de imóveis na Cidade do México.
+O pipeline completo — desde o carregamento dos dados até a previsão final — está implementado em um único arquivo: **`src/Main.py`**.
 
 ---
 
-# 🎯 Objetivo do Projeto
+## Estrutura do Projeto
+
+```
+project/
+│
+├── data/
+│   ├── processed/
+│   │   └── housing_data_CDMX_cleaned.csv
+│   ├── raw/
+│   │   └── housing_data_CDMX.csv
+│
+├── notebooks/
+│   └── data_exploration.ipynb
+│
+├── src/
+│   └── Main.py
+│
+├── image.png
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Objetivo do Projeto
 
 Criar um pipeline completo de aprendizado de máquina capaz de:
 
-1. **Carregar** e inspecionar os dados.
-2. **Limpar** inconsistências e valores ausentes.
-3. **Criar novas variáveis** relevantes para melhorar o desempenho dos modelos.
-4. **Treinar algoritmos supervisionados de regressão**, como:
-   - Regressão Linear
-   - Random Forest Regressor
-5. **Avaliar o desempenho** usando:
-   - MSE (Mean Squared Error)
-   - R² Score
-6. **Realizar previsões em novos imóveis**, informando preço estimado.
+1. Carregar e inspecionar os dados.
+2. Limpar e tratar inconsistências.
+3. Criar novas features relevantes.
+4. Realizar análise exploratória de dados.
+5. Treinar modelos de regressão (Linear Regression e Random Forest).
+6. Avaliar métricas como MSE, RMSE, MAE e R².
+7. Gerar previsões para novos imóveis.
 
 ---
 
-# 🔄 Pipeline do Projeto
+## Pipeline do Projeto
 
-## 1️⃣ ETL — Extração e Limpeza
+Todo o fluxo é executado dentro do arquivo **`Main.py`**, seguindo as etapas:
 
-### ✔ Extração
-O arquivo `housing_data_CDMX.csv` é carregado usando `etl/loader.py`.
+### 1. Carregamento e preparo dos dados
 
-### ✔ Limpeza
-No arquivo `etl/clean.py`, são executadas:
-- remoção de duplicatas
-- remoção de valores ausentes
-- remoção de outliers simples (dados com valores impossíveis)
+* Leitura do arquivo `housing_data_CDMX_cleaned.csv`.
+* Análise inicial (head, info, estatísticas).
+* Tratamento de valores ausentes.
+* Identificação de variáveis numéricas e categóricas.
 
-### ✔ Feature Engineering
-Em `etl/features.py`, novas colunas são criadas, como:
-- **price_per_m2** → preço por metro quadrado  
-- **difference** → área total – área coberta  
-- **area_ratio** → porcentagem da área coberta  
-- Codificação de variáveis categóricas numéricas
+### 2. Engenharia de Features
 
----
+O script cria automaticamente variáveis como:
 
-# 📊 2️⃣ Análise Exploratória de Dados
+* `area_difference` → diferença entre área total e área coberta
+* `area_ratio` → proporção entre área coberta e total
+* Codificação numérica de colunas categóricas com poucas categorias
+* Seleção automatizada das colunas de entrada (features)
 
-Os módulos em `analysis/` geram:
-- histogramas de distribuição
-- estatísticas descritivas
-- possíveis correlações entre variáveis
+### 3. Análise Exploratória de Dados (EDA)
 
-Isso ajuda a entender o comportamento do preço e identificar padrões relevantes.
+Geração automática de:
 
----
+* histogramas
+* boxplots
+* heatmap de correlação
+* scatterplots
+* análise de outliers
+* gráficos de distribuição de preço
 
-# 🤖 3️⃣ Treinamento dos Modelos
+### 4. Treinamento dos modelos
 
-Em `ml/train.py`, modelos como:
-- **LinearRegression**
-- **RandomForestRegressor**
+Modelos utilizados:
 
-são treinados usando um `Pipeline` com:
-- `StandardScaler()`  
-- modelo final
+* Linear Regression (com StandardScaler)
+* Random Forest Regressor
 
-O pré-processamento e separação treino/teste ficam em `preprocess.py`.
+Ambos são avaliados com:
 
----
+* MSE
+* RMSE
+* MAE
+* R²
+* R² com cross-validation (5-fold)
 
-# 🧪 4️⃣ Avaliação dos Modelos
+### 5. Visualização dos resultados
 
-Em `ml/evaluate.py`, cada modelo é avaliado com:
+São gerados:
 
-| Métrica | Descrição |
-|--------|-----------|
-| **MSE (Mean Squared Error)** | Erro médio ao quadrado |
-| **R² Score** | Quanto o modelo explica da variação dos dados |
-
-O relatório é exibido no console no final da execução.
+* gráfico de previsões vs valores reais
+* gráfico de resíduos
+* importância das features (para Random Forest)
 
 ---
 
-# 🔮 5️⃣ Predição de Novo Imóvel
+## Predição de Novo Imóvel
 
-Você pode prever o preço de um imóvel passando um dicionário com os atributos:
+Exemplo de dicionário usado no código:
 
 ```python
 novo_imovel = {
@@ -117,3 +123,44 @@ novo_imovel = {
     "places_encoded": 2,
     "currency_encoded": 0
 }
+```
+
+---
+
+## Como Executar
+
+1. Instale as dependências:
+
+```
+pip install -r requirements.txt
+```
+
+2. Garanta que o arquivo processado esteja em:
+
+```
+data/processed/housing_data_CDMX_cleaned.csv
+```
+
+3. Execute o script principal:
+
+```
+python src/Main.py
+```
+
+---
+
+## Observações
+
+* Toda a lógica está centralizada no arquivo **Main.py**, que unifica ETL, EDA, engenharia de features, treino e avaliação.
+* O notebook na pasta `notebooks/` é apenas para exploração adicional dos dados.
+
+---
+
+Se quiser, também posso:
+
+✔ reorganizar o README para ficar mais acadêmico
+✔ gerar badges (Python, License, Status, etc.)
+✔ criar uma seção de resultados automáticos
+✔ adicionar um diagrama de fluxo (fluxograma do pipeline)
+
+Só pedir!

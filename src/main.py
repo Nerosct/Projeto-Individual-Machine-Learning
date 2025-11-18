@@ -50,7 +50,7 @@ print("=" * 70)
 print("\n2. ETL E LIMPEZA DOS DADOS")
 
 # CARREGUE SEU DATASET REAL AQUI
-df = pd.read_csv('data/processed/housing_data_CDMX_cleaned.csv')
+df = pd.read_csv('data\processed\housing_data_CDMX_cleaned.csv')
 
 
 # ANÁLISE EXPLORATÓRIA INICIAL
