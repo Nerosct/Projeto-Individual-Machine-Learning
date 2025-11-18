@@ -1,9 +1,10 @@
 version: "3.9"
 
 services:
-  housing-ml:
+  app:
     build: .
-    container_name: housing_ml
+    container_name: analise_imoveis
     volumes:
-      - ./data:/app/data
+      - ./src:/app/src
+      - ./outputs:/app/outputs
     command: python src/Main.py

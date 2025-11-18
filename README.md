@@ -51,10 +51,10 @@ Criar um pipeline completo de aprendizado de máquina capaz de:
 
 Todo o fluxo é executado dentro do arquivo **`Main.py`**, seguindo as etapas:
 
-### 1. Carregamento e preparo dos dados
+### 1. Carregamento e Preparo dos Dados
 
 * Leitura do arquivo `housing_data_CDMX_cleaned.csv`.
-* Análise inicial (head, info, estatísticas).
+* Exibição de amostras, estatísticas e informações gerais do dataset.
 * Tratamento de valores ausentes.
 * Identificação de variáveis numéricas e categóricas.
 
@@ -62,30 +62,30 @@ Todo o fluxo é executado dentro do arquivo **`Main.py`**, seguindo as etapas:
 
 O script cria automaticamente variáveis como:
 
-* `area_difference` → diferença entre área total e área coberta
-* `area_ratio` → proporção entre área coberta e total
-* Codificação numérica de colunas categóricas com poucas categorias
+* `area_difference` — diferença entre área total e área coberta
+* `area_ratio` — proporção entre área coberta e total
+* Codificação numérica de colunas categóricas
 * Seleção automatizada das colunas de entrada (features)
 
 ### 3. Análise Exploratória de Dados (EDA)
 
-Geração automática de:
+São gerados:
 
 * histogramas
 * boxplots
 * heatmap de correlação
 * scatterplots
 * análise de outliers
-* gráficos de distribuição de preço
+* gráficos de distribuição do preço
 
-### 4. Treinamento dos modelos
+### 4. Treinamento dos Modelos
 
 Modelos utilizados:
 
 * Linear Regression (com StandardScaler)
 * Random Forest Regressor
 
-Ambos são avaliados com:
+As métricas calculadas incluem:
 
 * MSE
 * RMSE
@@ -93,19 +93,19 @@ Ambos são avaliados com:
 * R²
 * R² com cross-validation (5-fold)
 
-### 5. Visualização dos resultados
+### 5. Visualização dos Resultados
 
-São gerados:
+São produzidos gráficos como:
 
-* gráfico de previsões vs valores reais
-* gráfico de resíduos
-* importância das features (para Random Forest)
+* previsões vs valores reais
+* resíduos
+* importância das variáveis (Random Forest)
 
 ---
 
 ## Predição de Novo Imóvel
 
-Exemplo de dicionário usado no código:
+Exemplo de dicionário utilizado no código:
 
 ```python
 novo_imovel = {
@@ -135,7 +135,7 @@ novo_imovel = {
 pip install -r requirements.txt
 ```
 
-2. Garanta que o arquivo processado esteja em:
+2. Certifique-se de que o arquivo processado esteja localizado em:
 
 ```
 data/processed/housing_data_CDMX_cleaned.csv
@@ -151,16 +151,7 @@ python src/Main.py
 
 ## Observações
 
-* Toda a lógica está centralizada no arquivo **Main.py**, que unifica ETL, EDA, engenharia de features, treino e avaliação.
-* O notebook na pasta `notebooks/` é apenas para exploração adicional dos dados.
+* Toda a lógica está centralizada em **Main.py**, cobrindo ETL, EDA, engenharia de features, treinamento e avaliação.
+* O notebook em `notebooks/` é opcional e serve apenas para exploração manual dos dados.
 
 ---
-
-Se quiser, também posso:
-
-✔ reorganizar o README para ficar mais acadêmico
-✔ gerar badges (Python, License, Status, etc.)
-✔ criar uma seção de resultados automáticos
-✔ adicionar um diagrama de fluxo (fluxograma do pipeline)
-
-Só pedir!
